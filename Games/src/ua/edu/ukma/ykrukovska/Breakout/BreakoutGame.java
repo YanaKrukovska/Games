@@ -1,21 +1,16 @@
 package ua.edu.ukma.ykrukovska.Breakout;
-
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-
 import acm.util.RandomGenerator;
-
 import static ua.edu.ukma.ykrukovska.Breakout.Constants.*;
 
 public class BreakoutGame extends GraphicsProgram {
-
 
     private double vx, vy;
     private GRect paddle;
@@ -28,6 +23,7 @@ public class BreakoutGame extends GraphicsProgram {
         setUpWorld();
         gameplay();
     }
+
 
     private void gameplay() {
         while (ballCounter < NTURNS + 1) {
@@ -148,7 +144,7 @@ public class BreakoutGame extends GraphicsProgram {
 
     }
 
-    public void mouseDragged(MouseEvent e) {
+    public void mouseMoved(MouseEvent e) {
 
 
         if (e.getX() > 0 && e.getX() + PADDLE_WIDTH < APPLICATION_WIDTH) {
