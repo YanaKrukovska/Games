@@ -14,10 +14,6 @@ import java.awt.event.KeyEvent;
 
 import static ua.edu.ukma.ykrukovska.warplane.GameConstants.*;
 
-/*Task: create a game where planes shoots targets on the ground.
- * Made by: Yana Krukovska
- * WarPlaneGame.java*/
-
 public class WarPlaneGame extends GraphicsProgram {
 
     private GPlane plane;
@@ -32,7 +28,6 @@ public class WarPlaneGame extends GraphicsProgram {
 
     public void run() {
         addKeyListeners(this);
-
         initModel();
         this.setSize(WORLD_WIDTH, WORLD_HEIGHT);
         GImage image = new GImage("C:\\IdeaProjects\\Games\\Games\\WarPlane.png ");
@@ -40,7 +35,6 @@ public class WarPlaneGame extends GraphicsProgram {
         add(image, 0, 0);
 
         drawWorld();
-
 
         while (plane.getX() < WORLD_WIDTH) {
             plane.setLocation(plane.getX() + 1, plane.getY());
@@ -63,22 +57,17 @@ public class WarPlaneGame extends GraphicsProgram {
                 break;
             }
         }
-
-
     }
 
-    // Draws the plane.
     private void drawPlane() {
         plane = new GPlane(WORLD_WIDTH, WORLD_HEIGHT);
         add(plane);
     }
 
-    // Checks if the game is over
     private boolean isGameOver() {
         return gameWorldModel.getT1() == null && gameWorldModel.getT2() == null && gameWorldModel.getT3() == null && gameWorldModel.getT4() == null && gameWorldModel.getT5() == null;
     }
 
-    // Method which provides bombs' falling moves
     private void moveBombs() {
         if (gameWorldModel.getBomb() != null && bomb == null) {
             this.bomb = drawBomb();
@@ -91,7 +80,6 @@ public class WarPlaneGame extends GraphicsProgram {
         }
     }
 
-    // Method which destroys target in case bomb touched them.
     private void destroyTargets() {
         if (gameWorldModel.getT1() != null && gameWorldModel.getT1().isDestroyed()) {
             target1.setVisible(false);
@@ -115,13 +103,11 @@ public class WarPlaneGame extends GraphicsProgram {
         }
     }
 
-    // Method which draws the world
     private void drawWorld() {
         drawTargets();
         drawPlane();
     }
 
-    // Method which draws the targets
     private void drawTargets() {
         target1 = new GRect(gameWorldModel.getT1().getTargetWidth(), gameWorldModel.getT1().getTargetHeight());
         target1.setFilled(true);
@@ -149,7 +135,6 @@ public class WarPlaneGame extends GraphicsProgram {
         add(target5, gameWorldModel.getT5().getLocation(), WORLD_HEIGHT - gameWorldModel.getT5().getTargetHeight());
     }
 
-    // Sets the location, height and width for targets and plane
     private void initModel() {
         gameWorldModel = new GameWorld();
         Plane planeModel = new Plane((int) (WORLD_HEIGHT * 0.8), 0);
@@ -163,14 +148,10 @@ public class WarPlaneGame extends GraphicsProgram {
 
     }
 
-    // Key listener
     public void keyPressed(KeyEvent e) {
         gameWorldModel.addBomb();
-
-
     }
 
-    // Draws the bomb
     private GOval drawBomb() {
         int bombX = (int) plane.getX() + 100;
         int bombY = (int) plane.getY() + 100;
@@ -179,6 +160,5 @@ public class WarPlaneGame extends GraphicsProgram {
         bomb.setFillColor(Color.black);
         return bomb;
     }
-
 
 }

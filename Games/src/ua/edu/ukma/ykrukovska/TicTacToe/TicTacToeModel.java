@@ -17,29 +17,24 @@ public class TicTacToeModel {
 
     private boolean isCircleTurn = true;
 
-    // Set player 1 turn
     public boolean isCircleTurn() {
         return isCircleTurn;
     }
 
-    // Set player 1 turn
     public void setCircleTurn(boolean circleTurn) {
         isCircleTurn = circleTurn;
     }
 
-    // Method which switches players' turns
     public void changePlayer() {
         isCircleTurn = !isCircleTurn;
     }
 
-    // Method which does the turn
     public void doTurn(int row, int column) {
 
         updateBoard(row, column);
 
     }
 
-    // Checks if the winning combination was reached
     public int checkIfGameOver() {
         int isGameOver = 0;
         if (c11 + c12 + c13 == 3 || c11 + c12 + c13 == 12) {
@@ -62,7 +57,6 @@ public class TicTacToeModel {
         return isGameOver;
     }
 
-    // Updates the board after each turn
     private void updateBoard(int row, int column) {
         int currentSign = isCircleTurn ? CIRCLE : CROSS;
         if (row == 1 && column == 1) {
@@ -86,7 +80,6 @@ public class TicTacToeModel {
         }
     }
 
-    // Checks if the cell is empty
     public boolean isCellEmpty(int row, int column) {
 
         int currentValue = 0;

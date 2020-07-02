@@ -14,16 +14,10 @@ public class Bomb {
         this.height = height;
     }
 
-    /**
-     * @return attitude of the bomb
-     */
     public int getHeight() {
         return height;
     }
 
-    /**
-     * @return location of the bomb
-     */
     public int getLocation() {
         return location;
     }

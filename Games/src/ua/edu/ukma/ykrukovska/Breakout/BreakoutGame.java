@@ -1,18 +1,21 @@
 package ua.edu.ukma.ykrukovska.Breakout;
+
 import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import acm.util.RandomGenerator;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+
 import static ua.edu.ukma.ykrukovska.Breakout.Constants.*;
 
 public class BreakoutGame extends GraphicsProgram {
 
-    private double vx, vy;
+    private double vx;
+    private double vy;
     private GRect paddle;
     private GOval ball;
     private int ballCounter = 0;
@@ -21,9 +24,10 @@ public class BreakoutGame extends GraphicsProgram {
 
     public void run() {
         setUpWorld();
-        gameplay();
+        if (NBRICKS_PER_ROW != 0) {
+            gameplay();
+        }
     }
-
 
     private void gameplay() {
         while (ballCounter < NTURNS + 1) {
@@ -39,7 +43,6 @@ public class BreakoutGame extends GraphicsProgram {
             }
         }
     }
-
 
     private void writeYouWon() {
         GLabel youWon = new GLabel("You won", APPLICATION_WIDTH / 2., APPLICATION_HEIGHT / 2.);
@@ -60,7 +63,6 @@ public class BreakoutGame extends GraphicsProgram {
         setBricks();
         createPaddle();
         addMouseListeners(this);
-
     }
 
     private void createPaddle() {
@@ -70,16 +72,14 @@ public class BreakoutGame extends GraphicsProgram {
         add(paddle);
     }
 
-
     private void setBall() {
         ballCounter++;
+        pause(300);
         double x = APPLICATION_WIDTH / 2. - BALL_RADIUS;
         double y = APPLICATION_HEIGHT / 2. - BALL_RADIUS;
         ball = new GOval(x, y, BALL_RADIUS, BALL_RADIUS);
         ball.setFilled(true);
         add(ball);
-
-
     }
 
     private GObject getCollidingObject() {
@@ -96,15 +96,12 @@ public class BreakoutGame extends GraphicsProgram {
         }
     }
 
-
     private void ballMove() {
         setBallSpeed();
 
         while (true) {
-
             ball.move(vx, vy);
             pause(8);
-
 
             if ((ball.getX() < 0) && vx < 0 || ball.getX() >= (APPLICATION_WIDTH - BALL_RADIUS) && vx > 0) {
                 vx = -vx;
@@ -116,6 +113,7 @@ public class BreakoutGame extends GraphicsProgram {
                 ball.setVisible(false);
                 break;
             }
+
             GObject collider = getCollidingObject();
 
             if (collider == paddle) {
@@ -127,13 +125,8 @@ public class BreakoutGame extends GraphicsProgram {
                 }
                 vy = -vy;
             }
-
-
         }
-
-
     }
-
 
     private void setBallSpeed() {
         vy = 3.0;
@@ -141,19 +134,13 @@ public class BreakoutGame extends GraphicsProgram {
         if (rgen.nextBoolean(0.5)) {
             vy = -vy;
         }
-
     }
 
     public void mouseMoved(MouseEvent e) {
-
-
         if (e.getX() > 0 && e.getX() + PADDLE_WIDTH < APPLICATION_WIDTH) {
             paddle.setLocation(e.getX(), APPLICATION_HEIGHT - PADDLE_Y_OFFSET);
         }
-
-
     }
-
 
     private void setBricks() {
         brickCounter = NBRICKS_PER_ROW * NBRICK_ROWS;
@@ -171,24 +158,24 @@ public class BreakoutGame extends GraphicsProgram {
         add(brick);
     }
 
-    private void setBrickColour(int i, GRect brick) {
-        if (i == 1 || i == 2) {
+    private void setBrickColour(int row, GRect brick) {
+        if (row == 1 || row == 2) {
             brick.setFilled(true);
             brick.setColor(Color.RED);
             brick.setFillColor(Color.RED);
-        } else if (i == 3 || i == 4) {
+        } else if (row == 3 || row == 4) {
             brick.setFilled(true);
             brick.setColor(Color.ORANGE);
             brick.setFillColor(Color.ORANGE);
-        } else if (i == 5 || i == 6) {
+        } else if (row == 5 || row == 6) {
             brick.setFilled(true);
             brick.setColor(Color.YELLOW);
             brick.setFillColor(Color.YELLOW);
-        } else if (i == 7 || i == 8) {
+        } else if (row == 7 || row == 8) {
             brick.setFilled(true);
             brick.setColor(Color.GREEN);
             brick.setFillColor(Color.GREEN);
-        } else if (i == 9 || i == 10) {
+        } else if (row == 9 || row == 10) {
             brick.setFilled(true);
             brick.setColor(Color.CYAN);
             brick.setFillColor(Color.CYAN);

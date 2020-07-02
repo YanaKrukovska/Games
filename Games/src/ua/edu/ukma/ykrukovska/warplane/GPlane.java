@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class GPlane extends GCompound {
 
-
-    // Compounds elements of planes.
     public GPlane(double width, double height) {
 
         GPolygon rudder = createRudder(width, height);
@@ -34,7 +32,6 @@ public class GPlane extends GCompound {
 
     }
 
-    // Creates rudder
     private GPolygon createRudder(double width, double height) {
         GPolygon rudder = new GPolygon();
         rudder.addVertex(width / 16., height / 12.);
@@ -44,7 +41,6 @@ public class GPlane extends GCompound {
         return rudder;
     }
 
-    // Creates body of the plane
     private GPolygon createBody(double width, double height) {
         GPolygon body = new GPolygon();
         body.addVertex(width / 16., height / 6.);
@@ -54,7 +50,6 @@ public class GPlane extends GCompound {
 
     }
 
-    // Creares a wing of the plane
     private GPolygon createWing(double width, double height) {
         GPolygon wing = new GPolygon();
         wing.addVertex(width / 5.3, height / 4.8);
@@ -62,6 +57,5 @@ public class GPlane extends GCompound {
         wing.addVertex(width / 6.7, height / 3.4);
         return wing;
     }
-
 
 }

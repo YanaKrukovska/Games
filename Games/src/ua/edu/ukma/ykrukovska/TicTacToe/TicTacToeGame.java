@@ -1,14 +1,12 @@
 package ua.edu.ukma.ykrukovska.TicTacToe;
+
 import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-/* Create a tic tac toe game.
-Made by: Yana Krukovska
-TicTacToeGame.java
-* */
 
 public class TicTacToeGame extends GraphicsProgram implements MouseListener {
 
@@ -22,19 +20,15 @@ public class TicTacToeGame extends GraphicsProgram implements MouseListener {
     public void run() {
 
         drawBoard();
-
         label = new GLabel("");
         label.setFont("Chiller-36");
         add(label, 180, 300);
-
         addMouseListeners(this);
     }
 
-// Added mouse click listener
     public void mouseClicked(MouseEvent e) {
         int column = e.getX() / CELL_SIZE + 1;
         int row = e.getY() / CELL_SIZE + 1;
-
 
         if (model.isCellEmpty(row, column) && model.checkIfGameOver() == 0) {
             if (model.isCircleTurn()) {
@@ -45,9 +39,8 @@ public class TicTacToeGame extends GraphicsProgram implements MouseListener {
             }
             model.doTurn(row, column);
             if (model.checkIfGameOver() > 0) {
-               label.setLabel("Winner - player " + (model.isCircleTurn() ? "1" : "2"));
+                label.setLabel("Winner - player " + (model.isCircleTurn() ? "1" : "2"));
                 gameOverLine();
-
             } else {
                 model.changePlayer();
 
@@ -55,7 +48,6 @@ public class TicTacToeGame extends GraphicsProgram implements MouseListener {
         }
     }
 
-    // Creates a line which crosses winning combination
     private void gameOverLine() {
         if (model.checkIfGameOver() == 1) {
             GLine line1 = new GLine(50, 100, 550, 100);
@@ -92,13 +84,12 @@ public class TicTacToeGame extends GraphicsProgram implements MouseListener {
         }
     }
 
-// Draws a circle
     private void drawZero(int row, int column) {
         GOval zero = new GOval(100, 100);
         add(zero, CELL_SIZE * (column - 1) + CELL_SIZE / 4., CELL_SIZE * (row - 1) + CELL_SIZE / 4.);
 
     }
-// Draws a cross
+
     private void drawCross(int row, int column) {
         GLine xSide1 = new GLine((column - 1) * CELL_SIZE, (row - 1) * CELL_SIZE, column * CELL_SIZE, CELL_SIZE * row);
 
@@ -107,7 +98,6 @@ public class TicTacToeGame extends GraphicsProgram implements MouseListener {
         add(xSide2);
     }
 
-    // Draws a board for playing
     private void drawBoard() {
         this.setSize(WORLD_WIDTH, WORLD_HEIGHT);
         GLine line1Vertical = new GLine(WORLD_WIDTH / 3., 0, WORLD_WIDTH / 3., WORLD_HEIGHT);
@@ -118,9 +108,7 @@ public class TicTacToeGame extends GraphicsProgram implements MouseListener {
         add(line1Horizontal);
         GLine line2Horizontal = new GLine(0, WORLD_HEIGHT / 1.5, WORLD_WIDTH, WORLD_HEIGHT / 1.5);
         add(line2Horizontal);
-
     }
-
 
 }
 
